@@ -1,29 +1,27 @@
 $(function(){
-    var picbox = $('#picbox'),
+	var picbox = $('#picbox'),
 		back = $('.back', picbox);
 		
-	picbox.filedrop({
-	    paramname:'pic',
-		maxfilesize: 2,
-		maxfiles: 6,
-		url: 'upload.php',
+		picbox.filedrop({
+			paramname:'pic',
+			maxfilesize: 2,
+			maxfiles: 6,
+			url: 'upload.php',
 			
-		uploadFinished: function(i,file,response){
-			$.data(file).addClass('done');
-			$('.uploaded').show();
-		    
-		},
-	
-	error: function(err, file){
+			uploadFinished: function(i,file,response){
+				$.data(file).addClass('done');
+				$('.uploaded').show();
+			},
+			error: function(err, file){
 				switch(err){
 					case 'BrowserNotSupported':
-						showMessage('This browser does not support HTML5 file uploads');
+						showMessage('Your browser does not support HTML5 file uploads');
 						break;
 					case 'TooManyFiles':
-						alert('Too many files, There is a limit on max number of files');
+						alert('You went over the max number of files');
 						break;
 					case 'FileTooLarge':
-						alert(file.name+' is bigger than the maximum, please upload a smaller image');
+						alert(file.name+' is too big, please upload a smaller image');
 						break;
 					default:
 						break;
@@ -32,7 +30,7 @@ $(function(){
 			
 			beforeEach: function(file){
 				if(!file.type.match(/^image\//)){
-					alert('This file is not an image');
+					alert('Your file is not an image');
 					return false;
 				}
 			},
